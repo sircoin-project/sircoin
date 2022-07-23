@@ -122,7 +122,7 @@ public:
 
         // Blocks 10 - 100000 are Digishield without AuxPoW
         digishieldConsensus = consensus;
-        digishieldConsensus.nHeightEffective = 10;
+        digishieldConsensus.nHeightEffective = 1;
         digishieldConsensus.fDigishieldDifficultyCalculation = true;
         digishieldConsensus.nPowTargetTimespan = 60; // post-digishield: 1 minute
         digishieldConsensus.nCoinbaseMaturity = 30;
@@ -131,9 +131,9 @@ public:
         // Blocks 100000+ are AuxPoW or PoW
         auxpowConsensus = digishieldConsensus;
 		
-		auxpowConsensus.nAuxpowChainId = 0x0042; // 73s
+		auxpowConsensus.nAuxpowChainId = 0x0069; // 73s
 		
-        auxpowConsensus.nHeightEffective = 100000;
+        auxpowConsensus.nHeightEffective = 2;
         auxpowConsensus.fAllowLegacyBlocks = false;
 
         // Assemble the binary search tree of consensus parameters
@@ -146,9 +146,9 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xe8;
-        pchMessageStart[1] = 0xc9;
-        pchMessageStart[2] = 0xf0;
+        pchMessageStart[0] = 0xe1;
+        pchMessageStart[1] = 0xc1;
+        pchMessageStart[2] = 0xf1;
         pchMessageStart[3] = 0xa1;
         vAlertPubKey = ParseHex("04536744d5a57623b6602d8325383a580b1c00076a9e68fd75ff1f07240fb7408916e919cec8b8750a6e6aff08339db104106a75f976d5817490b9a1bdc2e0c727");
         nDefaultPort = 14200;
@@ -166,9 +166,8 @@ public:
         // Note that of those with the service bits flag, most only support a subset of possible options
         //vSeeds.push_back(CDNSSeedData("multidoge.org", "seed.multidoge.org", true));
         //vSeeds.push_back(CDNSSeedData("multidoge.org", "seed2.multidoge.org"));
-		vSeeds.push_back(CDNSSeedData("seed.bunkercoin.xyz", "seed.bunkercoin.xyz"));
-		vSeeds.push_back(CDNSSeedData("seed.bunkerseed.tk", "seed.bunkerseed.tk"));
-		vSeeds.push_back(CDNSSeedData("84.87.9.249", "84.87.9.249"));
+	//vSeeds.push_back(CDNSSeedData("seed.bunkercoin.xyz", "seed.bunkercoin.xyz"));
+	//vSeeds.push_back(CDNSSeedData("seed.bunkerseed.tk", "seed.bunkerseed.tk"));
 		
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,22);
@@ -185,26 +184,16 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-			(     0, uint256S("0x405d1f6dda6196fc4fc4f2d28a8a199a6206149556cc30ddfaa0a26c04c6c9c2"))
-			(     1, uint256S("0x9cbb556c9abae1eff31e1b25cd1948f63955e35f7e10d30704d245518773c3ea"))
-			(     15, uint256S("0x65e33ff135539d9458462cf0c7c49c2cecc7438c080213dc0c4f578161139e32"))
-			(     30, uint256S("0x8dea692c06c81cb5365f1dc7038618475d380ff38ba631a899d1dea9316ad5f9"))
-			(     50, uint256S("0x61881dacc6ffce7427cf033fc33dcc8cd13372d3517219cf5e16f2419c5d6c11"))
-			(     115, uint256S("0x945a2e3a0afcb3737fea470a4b8702830e145f7cd45205a52441825a532f9a11"))
-			(     60000, uint256S("0xd17d161d15ab4cd982bc3789cf44c257cadd2aa9975e8ea0fd599c098c27dc8a"))
-			(     80000, uint256S("0x38c5277d693b59030a73ec375cccc2769b7a21fd31d8d85fbbe9f9cec82edf94"))
-			(     100000, uint256S("0xffcd62ddf782a04e1f9b51c537b5e080ee0f99030803465eecaeb653c41c01fb"))
-            (     239930, uint256S("0x58b8b23586a2e05f0c62b731cc5bb5f30754979a550c097220142278ed3c39a1"))
-            (     239961, uint256S("0x7fd21781aa2d1e4d1887790f9c60e6350b95ed1aafaccbd767d40e52de0d89db"))
+			(     0, uint256S("
         };
 
         chainTxData = ChainTxData{
             // Data as of block 0xffcd62ddf782a04e1f9b51c537b5e080ee0f99030803465eecaeb653c41c01fb (height 100000).
             // Tx estimate based on average of year 2022 (~40k transactions per day)
-            1653082501, // * UNIX timestamp of last checkpoint block
-            249309,   // * total number of transactions between genesis and last checkpoint
+            0, // * UNIX timestamp of last checkpoint block
+            0,   // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            0.3        // * estimated number of transactions per second after checkpoint
+            0        // * estimated number of transactions per second after checkpoint
         };
     }
 };
